@@ -35,4 +35,8 @@ pipeline {
                     echo ' Deployment failed.'
                 }
             }
+        }
+
+
+    }
 }
