@@ -1,0 +1,10 @@
+{
+    "files": [
+        {
+            "pattern": "target/(*).war",
+            "target": "libs-snapshot-local/webapp/{1}.war", 
+            "recursive": "false"
+        }
+    ]
+}
+
