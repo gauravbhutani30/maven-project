@@ -30,6 +30,7 @@
   </distributionManagement>
 
   <build>
+	<finalName>webapp_${BUILD_NUMBER}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
