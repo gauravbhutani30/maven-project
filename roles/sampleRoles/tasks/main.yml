@@ -1,0 +1,44 @@
+---
+# tasks file for ./roles/bugtracking-tomcat
+- name: Start tomcat task
+  block: 
+  - name: Download tomcat tar file
+    get_url:
+       url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.27/bin/apache-tomcat-8.5.27.tar.gz
+       dest: "{{lookup('env', 'WORKSPACE')}}/roles/sampleRoles/files/" 
+
+  - name: Untar tomcat tar file
+    unarchive:
+        src: "{{lookup('env', 'WORKSPACE')}}/roles/sampleRoles/files/apache-tomcat-8.5.27.tar.gz"
+        dest: "{{lookup('env', 'WORKSPACE')}}/roles/sampleRoles/files"
+
+  #- name: Delete downloaded tar file
+   # file:
+   #   state: absent
+   #   path: "{{lookup('env', 'WORKSPACE')}}/deploy/roles/bugtracking-tomcat/files/apache-tomcat-8.5.27.tar.gz" 
+ 
+  #- name: Download war file
+  #  get_url:
+  #     url: http://localhost:5040/artifactory/libs-snapshot-local/bugtracking-final/bugtracking-{{lookup('env', 'BUILDNUMBER')}}.war 
+  #     dest: "{{lookup('env', 'WORKSPACE')}}/deploy/roles/bugtracking-tomcat/files/"
+
+  #- name: Move war file to webapps directory
+  #  command: mv "{{lookup('env', 'WORKSPACE')}}/deploy/roles/bugtracking-tomcat/files/bugtracking-{{lookup('env', 'BUILDNUMBER')}}.war" "{{lookup('env', 'WORKSPACE')}}/deploy/roles/bugtracking-tomcat/files/apache-tomcat-8.5.27/webapps/bugtracking.war" 
+
+  #- name: Change port address
+  #  template: 
+  #    src: server.xml.j2
+  #    dest: "{{lookup('env', 'WORKSPACE')}}/deploy/roles/bugtracking-tomcat/files/apache-tomcat-8.5.27/conf/server.xml"
+
+  #- name : Archive updated tomcat for docker
+  #  archive:
+  #    path: "{{lookup('env', 'WORKSPACE')}}/deploy/roles/bugtracking-tomcat/files/apache-tomcat-8.5.27" 
+  #    dest: "{{lookup('env', 'WORKSPACE')}}/deploy/apache-tomcat-8.5.27.tar.gz"
+
+#    notify:
+#    - start tomcat
+
+  rescue:
+  - name: Need to correct error
+    debug: msg='Caught an error'
+
